@@ -3,6 +3,7 @@
 namespace Presentit\Laravel;
 
 use Presentit\Present;
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Presentit\Transformer\TransformerFactoryInterface;
 
@@ -14,6 +15,22 @@ class PresentitServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
+
+    /**
+     * Boot the presentit service.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Collection::macro('present', function () {
+            return Present::collection($this);
+        });
+
+        Collection::macro('transformWith', function ($transformer) {
+            return $this->present()->with($transformer);
+        });
+    }
 
     /**
      * Register the service provider.
