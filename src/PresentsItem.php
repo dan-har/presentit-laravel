@@ -20,7 +20,7 @@ trait PresentsItem
      * Transform the entity to a new presentation.
      *
      * @param mixed $transformer
-     * @return \Presentit\Presentation ;
+     * @return \Presentit\Presentation
      */
     public function transform($transformer)
     {

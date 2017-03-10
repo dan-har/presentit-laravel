@@ -2,8 +2,6 @@
 
 namespace Presentit\Laravel\Contracts;
 
-use Presentit\Present;
-
 interface Presentable
 {
     /**
@@ -17,7 +15,7 @@ interface Presentable
      * Transform the entity to a new presentation.
      *
      * @param mixed $transformer
-     * @return \Presentit\Presentation ;
+     * @return \Presentit\Presentation
      */
     public function transform($transformer);
 }
