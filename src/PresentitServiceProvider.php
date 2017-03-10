@@ -23,13 +23,7 @@ class PresentitServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Collection::macro('present', function () {
-            return Present::collection($this);
-        });
-
-        Collection::macro('transformWith', function ($transformer) {
-            return $this->present()->with($transformer);
-        });
+        $this->setPresentCollectionMacros();
     }
 
     /**
@@ -44,6 +38,20 @@ class PresentitServiceProvider extends ServiceProvider
         });
 
         Present::setTransformerFactory($this->app[TransformerFactoryInterface::class]);
+    }
+
+    /**
+     * Set presentit functionality to the base collection.
+     */
+    protected function setPresentCollectionMacros()
+    {
+        Collection::macro('present', function () {
+            return Present::collection($this);
+        });
+
+        Collection::macro('transformWith', function ($transformer) {
+            return $this->present()->with($transformer);
+        });
     }
 
     /**
