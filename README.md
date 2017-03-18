@@ -8,9 +8,9 @@ See full presentit docs [here](https://github.com/dan-har/presentit)
 
 # Docs
 + [Installation](#installation)
-+ [Transform Eloquent models](#Transform-Eloquent-models)
-+ [Transform collection](#Transform-collection)
-+ [Transform nested models and relations](#Transform-nested-models-and-relations)
++ [Transform Eloquent models](#transform-eloquent-models)
++ [Transform collection](#transform-collection)
++ [Transform nested models and relations](#transform-nested-models-and-relations)
 
 ## Installation
 
