@@ -17,7 +17,7 @@ See full presentit docs [here](https://github.com/dan-har/presentit)
 Install using composer
 
 ```
-composer require dan-har/presentit-laravelq
+composer require dan-har/presentit-laravel
 ```
 
 Add the presentit service provider to the app config file
