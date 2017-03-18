@@ -63,8 +63,6 @@ $user->transform(function(User $user){
 
 Instead of closure transformer you can pass a transformer class, see presentit docs or example below.
 
-> The collection presentit api uses the ```transformWith``` method because the ```transform``` method exists in the base laravel collection.
-
 ## Transform collections
 
 To transform collections the ```present``` and ```transformWith``` macros were added to the base collection.
@@ -86,6 +84,8 @@ $posts->transformWith(function (Post $post) {
 ```
 
 Model relations that returns collections such as HasMany will also have the presentit transformation functionality
+
+> The collection presentit api uses the ```transformWith``` method because the ```transform``` method exists in the base laravel collection.
   
 ```php
 class Post implements Presentable
