@@ -8,18 +8,19 @@ See full presentit docs [here](https://github.com/dan-har/presentit)
 
 # Docs
 + [Installation](#installation)
-+ [Transform Eloquent models](#Transform Eloquent models)
-+ [Transform collection](#Transform collection)
++ [Transform Eloquent models](#Transform-Eloquent-models)
++ [Transform collection](#Transform-collection)
++ [Transform nested models and relations](#Transform-nested-models-and-relations)
 
 ## Installation
 
 Install using composer
 
 ```
-composer require dan-har/presentit-laravel
+composer require dan-har/presentit-laravelq
 ```
 
-Add the presentit service provider to the app config
+Add the presentit service provider to the app config file
 
 ```php
 'providers' => [
@@ -60,7 +61,9 @@ $user->transform(function(User $user){
 });
 ```
 
-Note that instead of closure transformer you can pass a transformer class, see presentit docs.
+Instead of closure transformer you can pass a transformer class, see presentit docs or example below.
+
+> The collection presentit api uses the ```transformWith``` method because the ```transform``` method exists in the base laravel collection.
 
 ## Transform collections
 
@@ -102,4 +105,57 @@ $posts->comments->transformWith(function (Comment $comment) {
         //...
     ];
 });
+```
+
+## Nested models and relations
+
+To demonstrate the nested model transformation we will use an example of a Post with comments and on each comment users can write comments.
+So first we use a transformer class for the Post, Comment and User model 
+
+```php
+class UserTransformer
+{
+    public function transform(User $user) {
+        return [
+            'name' => ucfirst($user->name),
+            'profile_image' => $user->profile_image ?: Hidden::key(),
+        ];
+    }
+}
+
+class PostTransformer
+{
+    public function tranfrom(Post $post)
+    {
+        return [
+            'title' => $post->title,
+            'text' => $post->text,
+            'user' => $post->user->transform(UserTransformer::class),
+            'datetime' => $post->created_at->toW3cString(),
+            'comments' => $post->comments->transformWith(CommentTransformer::class),
+        ];
+    }
+}
+
+class CommentTransformer
+{
+    public function transform(Comment $comment)
+    {
+        return [
+            'text' => $comment->text,
+            'datetime' => $comment->created_at->toW3cString(),
+            'edited_datetime' => $comment->edited_at ? $comment->edited_at : Hidden::key(),
+            'comments' => $comment->comments->transformWith(CommentTransformer::class),
+        ];
+    }
+}
+
+```
+
+Then to transform a single post use
+
+```php
+$post = Post::find(1);
+
+$array = $post->transform(PostTransformer::class)->show();
 ```
