@@ -9,7 +9,7 @@ See full presentit docs [here](https://github.com/dan-har/presentit)
 # Docs
 + [Installation](#installation)
 + [Transform Eloquent models](#transform-eloquent-models)
-+ [Transform collection](#transform-collection)
++ [Transform collections](#transform-collections)
 + [Transform nested models and relations](#transform-nested-models-and-relations)
 
 ## Installation
@@ -107,7 +107,7 @@ $posts->comments->transformWith(function (Comment $comment) {
 });
 ```
 
-## Nested models and relations
+## Transform nested models and relations
 
 To demonstrate the nested model transformation we will use an example of a Post with comments and on each comment users can write comments.
 So first we use a transformer class for the Post, Comment and User model 
