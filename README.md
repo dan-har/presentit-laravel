@@ -123,6 +123,22 @@ class UserTransformer
     }
 }
 
+
+class CommentTransformer
+{
+    public function transform(Comment $comment)
+    {
+        return [
+            'text' => $comment->text,
+            'datetime' => $comment->created_at->toW3cString(),
+            'edited_datetime' => $comment->edited_at ? $comment->edited_at : Hidden::key(),
+            'user' => $comment->user->transform(UserTransformer::class),
+            'comments' => $comment->comments->transformWith(CommentTransformer::class),
+        ];
+    }
+}
+
+
 class PostTransformer
 {
     public function tranfrom(Post $post)
@@ -136,20 +152,6 @@ class PostTransformer
         ];
     }
 }
-
-class CommentTransformer
-{
-    public function transform(Comment $comment)
-    {
-        return [
-            'text' => $comment->text,
-            'datetime' => $comment->created_at->toW3cString(),
-            'edited_datetime' => $comment->edited_at ? $comment->edited_at : Hidden::key(),
-            'comments' => $comment->comments->transformWith(CommentTransformer::class),
-        ];
-    }
-}
-
 ```
 
 Then to transform a single post use
