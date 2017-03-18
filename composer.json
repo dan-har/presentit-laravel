@@ -1,5 +1,17 @@
 {
     "name": "dan-har/presentit-laravel",
+    "description": "Transformers for nested Eloquent models and collection for building API with Laravel framework",
+    "keywords": [
+        "presentit-laravel",
+        "presentit",
+        "eloquent-transformer",
+        "laravel-model-transformer",
+        "json",
+        "api",
+        "transformer",
+        "nested",
+        "rest"
+    ],
     "license": "MIT",
     "authors": [
         {
