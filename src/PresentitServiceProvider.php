@@ -10,13 +10,6 @@ use Presentit\Transformer\TransformerFactoryInterface;
 class PresentitServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
      * Boot the presentit service.
      *
      * @return void
@@ -52,17 +45,5 @@ class PresentitServiceProvider extends ServiceProvider
         Collection::macro('transformWith', function ($transformer) {
             return $this->present()->with($transformer);
         });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [
-            TransformerFactoryInterface::class,
-        ];
     }
 }
